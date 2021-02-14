@@ -12,6 +12,10 @@
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
+# Gradle
+gradlew
+gradlew.bat
+
 # Package Files #
 *.jar
 *.war
@@ -28,3 +32,5 @@ hs_err_pid*
 # Project exclude paths
 /.gradle/
 /build/
+/.idea/
+/gradle/wrapper/
