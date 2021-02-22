@@ -20,6 +20,14 @@ class BinaryTreeTest {
 
     @Test
     void delete() {
+
+
+        BinaryTree.Node<Integer> root  = new BinaryTree.Node<>(1,
+                new BinaryTree.Node<>(2, null, null),
+                null);
+        BinaryTree<Integer> binaryTree = new BinaryTree<>(root);
+        BinaryTree.Node<Integer> deleteTreee = binaryTree.delete(1);
+        assert deleteTreee.getElement() == 2 ;
     }
 
     @Test

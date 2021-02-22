@@ -2,6 +2,7 @@ package com.coding.tree;
 
 public class BinaryTree<T> {
 
+    private Node<T> root;
     static class Node<T>{
         private T element;
         private Node<T> leftElement;
@@ -26,7 +27,6 @@ public class BinaryTree<T> {
         }
     }
 
-    private Node<T> root;
 
     public BinaryTree(Node<T> root){
         this.root = root;
@@ -65,8 +65,34 @@ public class BinaryTree<T> {
         return null;
     }
 
-    public void delete(T element){
+    private Node<T> search(Node<T> node, T element){
+        if(node != null){
+            if(node.element.equals(element)){
+                return node;
+            }
 
+            Node<T> leftNode = search(node.getLeftElement(), element);
+            if(leftNode != null){
+                return leftNode;
+            }
+            Node<T> rightNode = search(node.getRightElement(), element);
+            if(rightNode != null){
+                return rightNode;
+            }
+        }
+
+        return null;
+    }
+    public Node<T> delete(T element){
+        Node<T> node = search(root, element);
+
+        if(node != null){
+            if(node.getLeftElement() != null){
+                node = node.leftElement;
+            }
+        }
+
+        return root;
     }
 
     public T search(T element){
