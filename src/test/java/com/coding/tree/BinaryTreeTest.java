@@ -9,25 +9,19 @@ class BinaryTreeTest {
     @Test
     void insert() {
 
-        BinaryTree.Node<Integer> root  = new BinaryTree.Node<>(1,
-                new BinaryTree.Node<>(2, null, null),
-                null);
-        BinaryTree<Integer> binaryTree = new BinaryTree<>(root);
-        BinaryTree.Node<Integer> addTree = binaryTree.insert(4);
-        assert addTree.getRightElement().getElement() == 4 ;
+        BinaryTree<Integer> tree  = new BinaryTree<>(1);
+        BinaryTree<Integer> insertTree = tree.insert(4);
+        assert insertTree.getLeft().getElement() == 4 ;
 
     }
 
     @Test
     void delete() {
-
-
-        BinaryTree.Node<Integer> root  = new BinaryTree.Node<>(1,
-                new BinaryTree.Node<>(2, null, null),
-                null);
-        BinaryTree<Integer> binaryTree = new BinaryTree<>(root);
-        BinaryTree.Node<Integer> deleteTreee = binaryTree.delete(1);
-        assert deleteTreee.getElement() == 2 ;
+        BinaryTree<Integer> tree  = new BinaryTree<>(1);
+        tree.insert(4);
+        tree.insert(5);
+        BinaryTree<Integer> deleteTree = tree.delete(5);
+        assert deleteTree.getElement() == 1 ;
     }
 
     @Test

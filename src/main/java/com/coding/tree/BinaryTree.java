@@ -2,80 +2,69 @@ package com.coding.tree;
 
 public class BinaryTree<T> {
 
-    private Node<T> root;
-    static class Node<T>{
-        private T element;
-        private Node<T> leftElement;
-        private Node<T> rightElement;
+    private T element;
+    private BinaryTree<T> left;
+    private BinaryTree<T> right;
 
-        public Node(T element, Node<T> leftElement, Node<T> rightElement){
-            this.element = element;
-            this.leftElement = leftElement;
-            this.rightElement = rightElement;
-        }
 
-        public Node<T> getLeftElement(){
-            return leftElement;
-        }
+    public BinaryTree(T root){
+        this.element = root;
+    }
+    public BinaryTree<T> getLeft() {
+        return left;
+    }
 
-        public Node<T> getRightElement(){
-            return rightElement;
-        }
+    public BinaryTree<T> getRight() {
+        return right;
+    }
 
-        public T getElement(){
-            return element;
-        }
+    public T getElement(){
+        return element;
     }
 
 
-    public BinaryTree(Node<T> root){
-        this.root = root;
+    public BinaryTree<T> insert(T element){
+
+        if(element != null){
+            return insert(this, element);
+        }
+
+        return this;
     }
 
+    private BinaryTree<T> insert(BinaryTree<T> tree, T insertElement){
 
-
-    public Node<T> insert(T element){
-
-        if(root != null){
-            return insert(root, element);
+        if(tree.getLeft() == null){
+            tree.left = new BinaryTree<>(insertElement);
+            return tree;
         }
 
-        return null;
-    }
-
-    private Node<T> insert(Node<T> node, T insertElement){
-
-        if(node.getLeftElement() == null){
-            node.leftElement = new Node<>(insertElement, null, null);
-            return root;
+        if(tree.getRight() == null){
+            tree.right = new BinaryTree<>(insertElement);
+            return tree;
         }
 
-        if(node.getRightElement() == null){
-            node.rightElement = new Node<>(insertElement, null, null);
-            return root;
+        if(tree.getLeft() != null){
+            return insert(tree.getLeft(),insertElement);
         }
 
-        if(node.getLeftElement() != null){
-            return insert(node.getLeftElement(),insertElement);
-        }
-
-        if(node.getRightElement() != null){
-            return insert(node.getRightElement(),insertElement);
+        if(tree.getRight() != null){
+            return insert(tree.getRight(),insertElement);
         }
         return null;
     }
 
-    private Node<T> search(Node<T> node, T element){
-        if(node != null){
-            if(node.element.equals(element)){
-                return node;
+    private BinaryTree<T> search(BinaryTree<T> tree, T element){
+        if(tree != null){
+            if(tree.element.equals(element)){
+                return tree;
             }
 
-            Node<T> leftNode = search(node.getLeftElement(), element);
+            BinaryTree<T> leftNode = search(tree.getLeft(), element);
             if(leftNode != null){
                 return leftNode;
             }
-            Node<T> rightNode = search(node.getRightElement(), element);
+            BinaryTree<T> rightNode = search(tree.getRight(), element);
             if(rightNode != null){
                 return rightNode;
             }
@@ -83,16 +72,16 @@ public class BinaryTree<T> {
 
         return null;
     }
-    public Node<T> delete(T element){
-        Node<T> node = search(root, element);
+    public BinaryTree<T> delete(T element){
+        BinaryTree<T> tree = search(this, element);
 
-        if(node != null){
-            if(node.getLeftElement() != null){
-                node = node.leftElement;
+        if(tree != null){
+            if(tree.getLeft() != null){
+                tree = tree.left;
             }
         }
 
-        return root;
+        return tree;
     }
 
     public T search(T element){
@@ -103,4 +92,6 @@ public class BinaryTree<T> {
     public T getRandomNode(){
         return null;
     }
+
+
 }
